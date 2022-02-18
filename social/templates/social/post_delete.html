@@ -1,0 +1,305 @@
+{% extends 'landing/base.html' %}
+
+{% block content %}
+<style>
+	.lol{
+		border-radius: 25px;
+	  background-color: #555;
+	  border: 2px solid #333;
+	}
+	.panel {
+  min-height: 50;
+  max-height: 50;
+  overflow-y: scroll;
+}
+	.white{
+		background-color:#f1f1f1; 
+	}
+  * {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	  }
+	  
+	  h1 {
+		color: #426696;
+		font-weight: 600;
+		font-size: 3rem;
+		opacity: 0.8;
+	  }
+	  h2,
+	  p {
+		color: #658ec6;
+		font-weight: 500;
+		opacity: 0.8;
+	  }
+	  
+	  h3 {
+		color: #426696;
+		font-weight: 600;
+		opacity: 0.8;
+	  }
+	  
+	  main {
+		font-family: "Poppins", sans-serif;
+		min-height: 100vh;
+		height: auto;
+		background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	  }
+	  
+	  .glass {
+		background: white;
+		height: auto;
+		width: 60%;
+		background: linear-gradient(
+		  to right bottom,
+		  rgba(255, 255, 255, 0.7),
+		  rgba(255, 255, 255, 0.3)
+		);
+		border-radius: 2rem;
+		z-index: 2;
+		backdrop-filter: blur(2rem);
+		display: flex;
+	  }
+	  .circle1,
+	  .circle3,
+	  .circle4,
+	  .circle2 {
+		background: white;
+		background: linear-gradient(
+		  to right bottom,
+		  rgba(255, 255, 255, 0.8),
+		  rgba(255, 255, 255, 0.3)
+		);
+		height: 20rem;
+		width: 20rem;
+		position: absolute;
+		border-radius: 50%;
+	  }
+	  
+	  .circle1 {
+		top: 5%;
+		right: 15%;
+	  }
+	  .circle2 {
+		bottom: 5%;
+		left: 10%;
+	  }
+	  .circle3 {
+		top: 100%;
+		right: 15%;
+	  }
+	  .circle4 {
+		top: 150%;
+		left: 10%;
+	  }
+	  .dashboard {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-evenly;
+		
+		background: linear-gradient(
+		  to right bottom,
+		  rgba(255, 255, 255, 0.7),
+		  rgba(255, 255, 255, 0.3)
+		);
+		border-radius: 2rem;
+	  }
+	  .link {
+		display: flex;
+		margin: 2rem 0rem;
+		padding: 1rem 5rem;
+		align-items: center;
+	  }
+	  .link h2 {
+		padding: 0rem 2rem;
+	  }
+	  
+	  .games {
+		flex: 2;
+	  }
+	  
+	  .pro {
+		background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+		border-radius: 2rem;
+		color: white;
+		padding: 1rem;
+		position: relative;
+	  }
+	  
+	
+	  
+	  .games {
+		margin: 5rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+	  }
+	  
+	  .card {
+		display: flex;
+		background: linear-gradient(
+		  to left top,
+		  rgba(255, 255, 255, 0.8),
+		  rgba(255, 255, 255, 0.5)
+		);
+		border-radius: 1rem;
+		margin: 2rem 0rem;
+		padding: 2rem;
+		box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
+		justify-content: space-between;
+	  }
+	  
+	 
+	  .card-info {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	  }
+	  
+	  /* .percentage {
+		font-weight: bold;
+		background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	  } */
+	  
+	.button0 span {
+	  cursor: pointer;
+	  display: inline-block;
+	  position: relative;
+	  transition: 0.5s;
+	}
+	
+	.button0 span:after {
+	  content: '\00bb';
+	  position: absolute;
+	  opacity: 0;
+	  top: 0;
+	  right: -20px;
+	  transition: 0.5s;
+	}
+	
+	.button0:hover span {
+	  padding-right: 25px;
+	}
+	
+	.button0:hover span:after {
+	  opacity: 1;
+	  right: 0;
+	}
+	.dashboard2 {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		/* align-items: center;
+		justify-content: space-evenly; */
+		
+		/* background: linear-gradient(
+		  to right bottom,
+		  rgba(255, 255, 255, 0.7),
+		  rgba(255, 255, 255, 0.3)
+		); */
+		border-radius: 2rem;
+	  }
+
+</style>
+<!-- <div class="white">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-light-grey w3-content" style="max-width:1600px"> -->
+
+<!-- Sidebar/menu -->
+
+	<!-- <div class="w3-container">
+		<div class="white">
+<nav class="w3-sidebar  w3-animate-left" style="z-index:3;width:300px; background-color: #f1f1f1;" id="mySidebar"><br>
+  
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+	<a class="navbar-brand" 
+    {% if user.is_authenticated %}
+    href="{% url 'post-list' %}"
+    {% else %}
+    href="{% url 'index' %}"
+    {% endif %}
+
+    ><i class="fas fa-comment"></i>Tobble</a>
+	
+	<br/>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li>
+          <a class="inbox-icon" href="{% url 'explore' %}">
+            <i class="far fa-compass"></i>
+          </a>
+        </li>
+      </ul>
+    <img src="/w3images/avatar_g2.jpg" style="width:45%;" class="w3-round"><br><br>
+    <h4><b></b></h4>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal," style="border-radius: 12px;"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Explore</a> 
+    <a href="{% url 'profile-search' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding," style="border-radius: 12px;"><i class="fa fa-search fa-fw w3-margin-right"></i>Search</a> 
+    <a href="{% url 'inbox' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding," style="border-radius: 12px;"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Messages</a>
+	<a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding," style="border-radius: 12px;"><i class="fa fa-bell fa-fw w3-margin-right"></i>Notifications</a>
+	<a href="coming-soon.html" onclick="w3_close()" class="w3-bar-item w3-button w3-padding," style="border-radius: 12px;"><i class="fa fa-tumblr fa-fw w3-margin-right"></i>TobbleCoin</a>
+	<a href="{% url 'profile' request.user.profile.pk %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding," style="border-radius: 12px;"><i class="fa fa-user fa-fw w3-margin-right"></i>Profile</a>
+	
+	<a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding", style="border-radius: 12px;"><i class="fa fa-ellipsis-h fa-fw w3-margin-right"></i>More</a>
+	<a href="{% url 'post-list' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding", style="background-color: rgba(0, 160, 0, 0.473); border-radius: 12px;"><i class="fa fa-plus-circle fa-fw w3-margin-right"></i>Post</a>
+
+  
+</div>
+</nav>
+</div> -->
+<!-- Overlay effect when opening sidebar on small screens -->
+<!-- <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div> -->
+
+
+
+</script>
+<main>
+  <div class="games">
+    <div class="status">
+      <div class="card">
+        <div class="cards">
+          <div class="cards-info">
+            <div class="container">
+                <div class="row mt-5">
+                    <div class="col-md-5 col-sm-6">
+                        <a href="{% url 'post-detail' object.pk %}" class="btn btn-light">Back To Post</a>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center mt-3 mb-5">
+                    <div class="col-md-5 col-sm-12 border-bottom">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <h5>Are You Sure?</h5>
+                            <p>You are about to delete this post, this cannot be undone.</p>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-danger mt-3">Delete</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </main>
+{% endblock content %}

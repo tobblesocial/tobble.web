@@ -1,0 +1,146 @@
+{% extends 'landing/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+	.lol{
+		border-radius: 25px;
+	  background-color: #555;
+	  border: 2px solid #333;
+	}
+	.panel {
+  min-height: 50;
+  max-height: 50;
+  overflow-y: scroll;
+}
+	.white{
+		background-color:#f1f1f1; 
+	}
+
+</style>
+<!-- <div class="white">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-light-grey w3-content" style="max-width:1600px">
+
+
+
+	<div class="w3-container">
+		<div class="white">
+<nav class="w3-sidebar  w3-animate-left" style="z-index:3;width:300px; background-color: #f1f1f1;" id="mySidebar"><br>
+  
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+	<a class="navbar-brand" 
+    {% if user.is_authenticated %}
+    href="{% url 'post-list' %}"
+    {% else %}
+    href="{% url 'index' %}"
+    {% endif %}
+
+    ><i class="fas fa-comment"></i>Tobble</a>
+	
+	<br/>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li>
+          <a class="inbox-icon" href="{% url 'explore' %}">
+            <i class="far fa-compass"></i>
+          </a>
+        </li>
+      </ul>
+    <img src="/w3images/avatar_g2.jpg" style="width:45%;" class="w3-round"><br><br>
+    <h4><b></b></h4>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal," style="border-radius: 12px;"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Explore</a> 
+    <a href="{% url 'profile-search' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding," style="border-radius: 12px;"><i class="fa fa-search fa-fw w3-margin-right"></i>Search</a> 
+    <a href="{% url 'inbox' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding," style="border-radius: 12px;"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Messages</a>
+	<a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding," style="border-radius: 12px;"><i class="fa fa-bell fa-fw w3-margin-right"></i>Notifications</a>
+	<a href="coming-soon.html" onclick="w3_close()" class="w3-bar-item w3-button w3-padding," style="border-radius: 12px;"><i class="fa fa-tumblr fa-fw w3-margin-right"></i>TobbleCoin</a>
+	<a href="{% url 'profile' request.user.profile.pk %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding," style="border-radius: 12px;"><i class="fa fa-user fa-fw w3-margin-right"></i>Profile</a>
+	
+	<a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding", style="border-radius: 12px;"><i class="fa fa-ellipsis-h fa-fw w3-margin-right"></i>More</a>
+	<a href="{% url 'post-list' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding", style="background-color: rgba(0, 160, 0, 0.473); border-radius: 12px;"><i class="fa fa-plus-circle fa-fw w3-margin-right"></i>Post</a>
+
+  
+</div>
+</nav>
+</div>
+
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div> -->
+
+
+
+</script>
+
+
+<div class="container">
+	<div class="row">
+		<div class="card col-md-12 mt-5 p-3 shadow-sm">
+			{% if thread.receiver == request.user %}
+				<h5>@{{ thread.user }}</h5>
+			{% else %}
+				<h5>@{{ thread.receiver }}</h5>
+			{% endif %}
+		</div>
+	</div>
+
+	{% if message_list.all.count == 0 %}
+	<div class="row my-5">
+		<div class="col-md-12">
+			<p class="empty-text">No Messages</p>
+		</div>
+	</div>
+	{% endif %}
+
+	{% for message in message_list %}
+	<div class="row">
+		{% if message.sender_user == request.user %}
+		<div class="col-md-12 my-1">
+			{% if message.image %}
+			<div>
+				<img src="{{ message.image.url }}" class="message-image" />
+			</div>
+			{% endif %}
+			<div class="sent-message my-3">
+				<p>{{ message.body }}</p>
+			</div>
+		</div>
+			{% elif message.receiver_user == request.user %}
+			<div class="col-md-12 offset-6">
+				{% if message.image %}
+				<div class="message-receiver-container ms-auto">
+					<img src="{{ message.image.url }}" class="message-image" />
+				</div>
+				{% endif %}
+				<div class="received-message my-3">
+					<p>{{ message.body }}</p>
+				</div>
+			</div>
+			{% endif %}
+		</div>
+	{% endfor %}
+
+	<div class="row">
+		<div class="card col-md-12 p-3 shadow-sm">
+			<form method="POST" action="{% url 'create-message' thread.pk %}" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form | crispy }}
+
+				<div class="d-grid gap-2 mt-3">
+					<button class="btn btn-light" type="submit">Send Message</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+{% endblock content %}

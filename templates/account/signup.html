@@ -1,0 +1,283 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glass Website</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  h1 {
+    color: #426696;
+    font-weight: 600;
+    font-size: 3rem;
+    opacity: 0.8;
+  }
+  h2,
+  p {
+    color: #658ec6;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+  
+  h3 {
+    color: #426696;
+    font-weight: 600;
+    opacity: 0.8;
+  }
+  
+  main {
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .glass {
+    background: white;
+    min-height: 80vh;
+    width: 60%;
+    background: linear-gradient(
+      to right bottom,
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.3)
+    );
+    border-radius: 2rem;
+    z-index: 2;
+    backdrop-filter: blur(2rem);
+    display: flex;
+  }
+  .circle1,
+  .circle2 {
+    background: white;
+    background: linear-gradient(
+      to right bottom,
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.3)
+    );
+    height: 20rem;
+    width: 20rem;
+    position: absolute;
+    border-radius: 50%;
+  }
+  
+  .circle1 {
+    top: 5%;
+    right: 15%;
+  }
+  .circle2 {
+    bottom: 5%;
+    left: 10%;
+  }
+  .dashboard {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    
+    background: linear-gradient(
+      to right bottom,
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.3)
+    );
+    border-radius: 2rem;
+  }
+  .link {
+    display: flex;
+    margin: 2rem 0rem;
+    padding: 1rem 5rem;
+    align-items: center;
+  }
+  .link h2 {
+    padding: 0rem 2rem;
+  }
+  
+  .games {
+    flex: 2;
+  }
+  
+  .pro {
+    background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+    border-radius: 2rem;
+    color: white;
+    padding: 1rem;
+    position: relative;
+  }
+  
+  .pro img {
+    position: absolute;
+    top: -10%;
+    right: 10%;
+  }
+  .pro h2 {
+    width: 40%;
+    color: white;
+    font-weight: 600;
+  }
+  
+  /* GAMES */
+  .status {
+    margin-bottom: 3rem;
+  }
+  
+  .status input {
+    background: linear-gradient(
+      to right bottom,
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.3)
+    );
+    border: none;
+    width: 50%;
+    padding: 0.5rem;
+    border-radius: 2rem;
+  }
+  
+  .games {
+    margin: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  
+  .card {
+    display: flex;
+    background: linear-gradient(
+      to left top,
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.5)
+    );
+    border-radius: 1rem;
+    margin: 2rem 0rem;
+    padding: 2rem;
+    box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
+    justify-content: space-between;
+  }
+  
+  .progress {
+    background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+    width: 100%;
+    height: 25%;
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .progress::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: rgb(236, 236, 236);
+    position: absolute;
+    left: 60%;
+  }
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .percentage {
+    font-weight: bold;
+    background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .button0 {
+  border-radius: 4px;
+  background-color: whitesmoke;
+  border: none;
+  color: #666;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button0 span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button0 span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button0:hover span {
+  padding-right: 25px;
+}
+
+.button0:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+  
+  </style>
+  <body>
+    <main>
+      <section class="glass">
+        <div class="dashboard">
+          <div class="row justify-content-center">
+            <div class="col-md-6 col-sm-12">
+              <h1>{% trans "Sign Up" %}</h1>
+          
+              <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+            </div>
+          
+          
+          <div class="row justify-content-center">
+            <div class="col-md-6 col-sm-12">
+              <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                {% csrf_token %}
+                {{ form|crispy }}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <div class="d-grid gap-2">
+                  <button class="mt-3 btn btn-light btn-block" type="submit">{% trans "Sign Up" %} &raquo;</button>
+                </div>
+              </form>
+            </div>
+          </div>
+              </div>
+              </form>
+            </div>
+          </div>
+      </section>
+    </main>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+  </body>
+</html>
+
+
+{% endblock %}
